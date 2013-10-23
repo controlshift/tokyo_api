@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "tokyo_api"
   gem.homepage = "http://github.com/controlshift/tokyo_api"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "Ruby API Wrapper for Tokyo CRM service"
+  gem.description = "Tokyo is a CRM middleware, this gem helps apps talk to it."
   gem.email = "nathan@controlshiftlabs.com"
   gem.authors = ["Nathan Woodhull"]
   # dependencies defined in Gemfile
