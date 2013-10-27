@@ -34,7 +34,8 @@ end
 
 def stub_tokyo_request(method, path)
   prefix = TokyoApi.new.connection.configuration.prefix.to_s
-  stub_request(method, "https://test.com" + prefix + path)
+  scheme = TokyoApi.new.connection.configuration.scheme.to_s
+  stub_request(method, "#{scheme}://test.com" + prefix + path)
 end
 
 
