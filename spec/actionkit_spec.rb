@@ -8,11 +8,11 @@ describe TokyoApi::Actionkit do
       subject.actionkit.client.connection.configuration.host.should == 'test.com'
     end
   end
-  
+
   describe 'full_user' do
     let(:body) { fixture('actionkit/full_user_success') }
     let(:request_path) { '/actionkit/full_user/1' }
-    let(:status) { 200 }  
+    let(:status) { 200 }
 
     before(:each) do
      stub_get(request_path).to_return(:body => body, :status => status,
@@ -26,12 +26,18 @@ describe TokyoApi::Actionkit do
         subject.actionkit.full_user('1').should == {'error' => 'Connection refused'}
       end
     end
-    
+
     describe 'error' do
       let(:body) { fixture('actionkit/full_user_success') } #TODO: actually figure out what this returns.
 
       it 'should find an organisation' do
         subject.actionkit.full_user('1').should == nil
+      end
+    end
+
+    describe 'user_path' do
+      it "should return relative path to user API endpoint" do
+        subject.actionkit.user_path('abc.123.xyz').should == 'actionkit/user/abc.123.xyz'
       end
     end
   end
