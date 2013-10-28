@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "tokyo_api"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Woodhull"]
-  s.date = "2013-10-23"
+  s.date = "2013-10-28"
   s.description = "Tokyo is a CRM middleware, this gem helps apps talk to it."
   s.email = "nathan@controlshiftlabs.com"
   s.extra_rdoc_files = [
@@ -31,16 +31,19 @@ Gem::Specification.new do |s|
     "lib/tokyo_api.rb",
     "lib/tokyo_api/actionkit.rb",
     "lib/tokyo_api/base.rb",
+    "lib/tokyo_api/bluestatedigital.rb",
     "lib/tokyo_api/client.rb",
     "lib/tokyo_api/expire.rb",
     "spec/actionkit_spec.rb",
+    "spec/bluestatedigital_spec.rb",
     "spec/client_spec.rb",
     "spec/expire_spec.rb",
     "spec/fixtures/actionkit/full_user_error",
     "spec/fixtures/actionkit/full_user_success",
     "spec/fixtures/expire/success",
     "spec/spec_helper.rb",
-    "spec/tokyo_api_spec.rb"
+    "spec/tokyo_api_spec.rb",
+    "tokyo_api.gemspec"
   ]
   s.homepage = "http://github.com/controlshift/tokyo_api"
   s.licenses = ["MIT"]
