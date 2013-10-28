@@ -9,7 +9,7 @@ module TokyoApi
     end
 
     def user_path(id)
-      "#{normalized_base_path}user/#{id}"
+      "/#{normalized_base_path}user/#{id}"
     end
   end
 end

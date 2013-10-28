@@ -37,7 +37,7 @@ describe TokyoApi::Actionkit do
 
     describe 'user_path' do
       it "should return relative path to user API endpoint" do
-        subject.actionkit.user_path('abc.123.xyz').should == 'actionkit/user/abc.123.xyz'
+        subject.actionkit.user_path('abc.123.xyz').should == '/actionkit/user/abc.123.xyz'
       end
     end
   end
