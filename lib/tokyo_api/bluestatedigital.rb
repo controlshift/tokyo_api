@@ -1,5 +1,5 @@
 module TokyoApi
-  class Actionkit < Base
+  class Bluestatedigital < Base
     def base_path
       'bluestatedigital'
     end

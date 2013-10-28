@@ -3,6 +3,10 @@ module TokyoApi
     def actionkit
       @actionkit ||= TokyoApi::Actionkit.new(client: self)
     end
+
+    def bluestatedigital
+      @bluestatedigital ||= TokyoApi::Bluestatedigital.new(client: self)
+    end
     
     def expire
       @expire ||= TokyoApi::Expire.new(client: self)
