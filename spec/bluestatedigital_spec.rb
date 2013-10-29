@@ -35,4 +35,10 @@ describe TokyoApi::Bluestatedigital do
       end
     end
   end
+
+  describe 'tokyo_blue_state_digital_user_path' do
+    it "should return rooted relative path to tokyo user API endpoint" do
+      subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456').should == '/bluestatedigital/user/-123456'
+    end
+  end
 end
