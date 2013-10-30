@@ -9,7 +9,7 @@ module TokyoApi
     end
 
     def tokyo_blue_state_digital_user_path(id)
-      "/#{normalized_base_path}user/#{id}"
+      "/#{normalized_base_path}constituent/#{id}"
     end
   end
 end
