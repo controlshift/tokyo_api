@@ -7,8 +7,7 @@ gem 'vertebrae'
 group :development do
   gem "rspec"
   gem 'webmock'
-  gem 'pry'
-  gem 'pry-debugger'
+  gem 'byebug'
   gem "bundler"
   gem "jeweler", "~> 1.8.4"
 end
