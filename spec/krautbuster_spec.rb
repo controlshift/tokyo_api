@@ -1,17 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe TokyoApi::Actionkit do
+describe TokyoApi::Krautbuster do
   subject { TokyoApi.new(host: 'test.com') }
 
   describe 'configuration' do
     it 'should propagate the host' do
-      subject.actionkit.client.connection.configuration.host.should == 'test.com'
+      expect(subject.krautbuster.client.connection.configuration.host).to eq 'test.com'
     end
   end
 
   describe 'full_user' do
     let(:body) { fixture('responses/full_user_success') }
-    let(:request_path) { '/actionkit/full_user/1' }
+    let(:request_path) { '/krautbuster/full_user/123abc456' }
     let(:status) { 200 }
 
     before(:each) do
@@ -23,22 +23,22 @@ describe TokyoApi::Actionkit do
       let(:body) { fixture('responses/full_user_error') }
 
       it 'should find an organisation' do
-        subject.actionkit.full_user('1').should == {'error' => 'Connection refused'}
+        expect(subject.krautbuster.full_user('123abc456')).to eq({'error' => 'Connection refused'})
       end
     end
 
     describe 'error' do
-      let(:body) { fixture('responses/full_user_success') } #TODO: actually figure out what this returns.
+      let(:body) { fixture('responses/full_user_success') }
 
       it 'should find an organisation' do
-        subject.actionkit.full_user('1').should == nil
+        expect(subject.krautbuster.full_user('123abc456')).to be_nil
       end
     end
+  end
 
-    describe 'user_path' do
-      it "should return relative path to user API endpoint" do
-        subject.actionkit.user_path('abc.123.xyz').should == '/actionkit/user/abc.123.xyz'
-      end
+  describe 'user_path' do
+    it "should return relative path to user API endpoint" do
+      expect(subject.krautbuster.user_path('123abc456')).to eq '/krautbuster/user/123abc456'
     end
   end
 end

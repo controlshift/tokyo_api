@@ -7,11 +7,15 @@ module TokyoApi
     def bluestatedigital
       @bluestatedigital ||= TokyoApi::Bluestatedigital.new(client: self)
     end
-    
+
+    def krautbuster
+      @krautbuster ||= TokyoApi::Krautbuster.new(client: self)
+    end
+
     def expire
       @expire ||= TokyoApi::Expire.new(client: self)
     end
-    
+
 
     def default_options
       {

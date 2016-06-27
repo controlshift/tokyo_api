@@ -10,7 +10,7 @@ describe TokyoApi::Bluestatedigital do
   end
 
   describe 'full_user' do
-    let(:body) { fixture('actionkit/full_user_success') }
+    let(:body) { fixture('responses/full_user_success') }
     let(:request_path) { '/bluestatedigital/full_user/1' }
     let(:status) { 200 }
 
@@ -20,7 +20,7 @@ describe TokyoApi::Bluestatedigital do
     end
 
     describe 'error' do
-      let(:body) { fixture('actionkit/full_user_error') }
+      let(:body) { fixture('responses/full_user_error') }
 
       it 'should find an organisation' do
         subject.bluestatedigital.full_user('1').should == {'error' => 'Connection refused'}
@@ -28,7 +28,7 @@ describe TokyoApi::Bluestatedigital do
     end
 
     describe 'error' do
-      let(:body) { fixture('actionkit/full_user_success') } #TODO: actually figure out what this returns.
+      let(:body) { fixture('responses/full_user_success') } #TODO: actually figure out what this returns.
 
       it 'should find an organisation' do
         subject.bluestatedigital.full_user('1').should == nil
@@ -38,7 +38,7 @@ describe TokyoApi::Bluestatedigital do
 
   describe 'tokyo_blue_state_digital_user_path' do
     it "should return rooted relative path to tokyo user API endpoint" do
-      subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456').should == '/bluestatedigital/user/-123456'
+      subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456').should == '/bluestatedigital/constituent/-123456'
     end
   end
 end
