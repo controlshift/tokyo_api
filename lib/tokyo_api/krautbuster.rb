@@ -11,5 +11,9 @@ module TokyoApi
     def user_path(session_id)
       "/#{normalized_base_path}user/#{session_id}"
     end
+
+    def subscription_status_path(token)
+      "/#{normalized_base_path}subscription_status/#{token}"
+    end
   end
 end
