@@ -8,6 +8,10 @@ module TokyoApi
       client.get_request("#{normalized_base_path}full_user/#{session_id}").body
     end
 
+    def session_status(session_id)
+      client.get_request("#{normalized_base_path}session_status/#{session_id}").body
+    end
+
     def user_path(session_id)
       "/#{normalized_base_path}user/#{session_id}"
     end
