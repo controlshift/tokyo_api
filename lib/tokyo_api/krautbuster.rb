@@ -15,5 +15,9 @@ module TokyoApi
     def subscription_status_path(token)
       "/#{normalized_base_path}subscription_status/#{token}"
     end
+
+    def session_status_path(session_id)
+      "/#{normalized_base_path}session_status/#{session_id}"
+    end
   end
 end
