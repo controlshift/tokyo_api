@@ -38,7 +38,7 @@ describe TokyoApi::Krautbuster do
 
   describe 'user_path' do
     it "should return relative path to user API endpoint" do
-      expect(subject.krautbuster.user_path('123abc456')).to eq '/krautbuster/user/123abc456'
+      expect(subject.krautbuster.user_path('123abc456', '/signatures/lookup')).to eq '/krautbuster/user/123abc456?signature_lookup_path=/signatures/lookup'
     end
   end
 end
