@@ -12,6 +12,10 @@ module TokyoApi
       client.get_request("#{normalized_base_path}session_status/#{session_id}").body
     end
 
+    def subscription_status(token)
+      client.get_request(subscription_status_path(token))
+    end
+
     def user_path(session_id, petition_id)
       "/#{normalized_base_path}user/#{session_id}?petition_id=#{petition_id}"
     end

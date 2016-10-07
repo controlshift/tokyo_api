@@ -6,12 +6,12 @@
 
 Gem::Specification.new do |s|
   s.name = "tokyo_api"
-  s.version = "0.3.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Nathan Woodhull"]
-  s.date = "2016-08-19"
+  s.date = "2016-10-07"
   s.description = "Tokyo is a CRM middleware, this gem helps apps talk to it."
   s.email = "nathan@controlshiftlabs.com"
   s.extra_rdoc_files = [

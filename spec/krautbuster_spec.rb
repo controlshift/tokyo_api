@@ -9,7 +9,7 @@ describe TokyoApi::Krautbuster do
     end
   end
 
-  describe 'full_user' do
+  describe '#full_user' do
     let(:body) { fixture('responses/full_user_success') }
     let(:request_path) { '/krautbuster/full_user/123abc456' }
     let(:status) { 200 }
@@ -36,9 +36,33 @@ describe TokyoApi::Krautbuster do
     end
   end
 
-  describe 'user_path' do
+  describe '#subscription_status' do
+    let(:client) { double }
+    let(:token) { '2134567890abcdef' }
+
+    subject { TokyoApi::Krautbuster.new(client: client) }
+
+    it 'should perform request on subscription_status_path' do
+      expect(subject).to receive(:subscription_status_path).with(token).and_return("/krautbuster/subscription_status?token=#{token}")
+      expect(client).to receive(:get_request).with("/krautbuster/subscription_status?token=#{token}").and_return({subscribed: true})
+
+      subs_status = subject.subscription_status(token)
+
+      expect(subs_status).to eq({subscribed: true})
+    end
+  end
+
+  describe '#user_path' do
     it "should return relative path to user API endpoint" do
       expect(subject.krautbuster.user_path('123abc456', 'save-the-trees')).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees'
+    end
+  end
+
+  describe '#subscription_status_path' do
+    subject { TokyoApi::Krautbuster.new }
+
+    it 'should return correct path' do
+      expect(subject.subscription_status_path('abc123')).to eq '/krautbuster/subscription_status/abc123'
     end
   end
 end
