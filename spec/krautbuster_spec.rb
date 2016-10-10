@@ -42,13 +42,30 @@ describe TokyoApi::Krautbuster do
 
     subject { TokyoApi::Krautbuster.new(client: client) }
 
-    it 'should perform request on subscription_status_path' do
+    before :each do
       expect(subject).to receive(:subscription_status_path).with(token).and_return("/krautbuster/subscription_status?token=#{token}")
-      expect(client).to receive(:get_request).with("/krautbuster/subscription_status?token=#{token}").and_return({subscribed: true})
+    end
+
+    it 'should perform request on subscription_status_path' do
+      expect(client).to receive(:get_request).with("/krautbuster/subscription_status?token=#{token}").and_return(double(body: {subscribed: true}))
 
       subs_status = subject.subscription_status(token)
 
       expect(subs_status).to eq({subscribed: true})
+    end
+
+    it 'should return nil if tokyo responds with 404' do
+      expect(client).to receive(:get_request).with("/krautbuster/subscription_status?token=#{token}").and_raise(Vertebrae::ResponseError.new(404, {method: 'get', url: "/krautbuster/subscription_status?token=#{token}", status: '404', body: 'Not Found'}))
+
+      subs_status = subject.subscription_status(token)
+
+      expect(subs_status).to be_nil
+    end
+
+    it 'should raise if tokyo responds with other error code' do
+      expect(client).to receive(:get_request).with("/krautbuster/subscription_status?token=#{token}").and_raise(Vertebrae::ResponseError.new(500, {method: 'get', url: "/krautbuster/subscription_status?token=#{token}", status: '500', body: 'Something bad happened'}))
+
+      expect { subject.subscription_status(token) }.to raise_error Vertebrae::ResponseError
     end
   end
 

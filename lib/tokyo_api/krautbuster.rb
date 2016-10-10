@@ -13,7 +13,16 @@ module TokyoApi
     end
 
     def subscription_status(token)
-      client.get_request(subscription_status_path(token))
+      begin
+        client.get_request(subscription_status_path(token)).body
+      rescue Vertebrae::ResponseError => e
+        # Status 404 is expected in these calls
+        if e.status_code == 404
+          return nil
+        end
+
+        raise
+      end
     end
 
     def user_path(session_id, petition_id)
