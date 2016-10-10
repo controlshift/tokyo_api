@@ -30,7 +30,9 @@ module TokyoApi
         raise ArgumentError, "unknown http method: #{method}"
       end
 
-      path =  connection.configuration.prefix + '/' + path
+      unless connection.configuration.prefix.blank?
+        path =  connection.configuration.prefix + '/' + path
+      end
 
       ::Vertebrae::Base.logger.debug "EXECUTED: #{method} - #{path} with #{params} and #{options}"
 
