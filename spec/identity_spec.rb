@@ -35,4 +35,10 @@ describe TokyoApi::Identity do
       end
     end
   end
+
+  describe 'tokyo_identity_user_path' do
+    it 'should return rooted relative path to tokyo user API endpoint' do
+      subject.identity.tokyo_identity_user_path('-123456').should == '/identity/user/-123456'
+    end
+  end
 end
