@@ -8,8 +8,8 @@ describe TokyoApi::Client do
     context 'process_basic_auth' do
       let(:options) { { :basic_auth => 'login:password' } }
       let(:config) { subject.connection.configuration  }
-      specify { config.username.should eq 'login' }
-      specify { config.password.should eq 'password' }
+      specify { expect(config.username).to eq 'login' }
+      specify { expect(config.password).to eq 'password' }
     end
 
   end

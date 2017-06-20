@@ -1,27 +1,17 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
-require 'webmock'
+require 'webmock/rspec'
 require 'tokyo_api'
-
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
-
 RSpec.configure do |config|
   config.include WebMock::API
   config.color = true
-
-
-  config.before(:each) do
-    WebMock.reset!
-  end
-  config.after(:each) do
-    WebMock.reset!
-  end
-
+  #config.raise_errors_for_deprecations!
 end
 
 def stub_get(path)
@@ -37,8 +27,6 @@ def stub_tokyo_request(method, path)
   scheme = TokyoApi.new.connection.configuration.scheme.to_s
   stub_request(method, "#{scheme}://test.com" + prefix + path)
 end
-
-
 
 def fixture_path
   File.expand_path("../fixtures", __FILE__)

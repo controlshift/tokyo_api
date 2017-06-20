@@ -5,7 +5,7 @@ describe TokyoApi::Actionkit do
 
   describe 'configuration' do
     it 'should propagate the host' do
-      subject.actionkit.client.connection.configuration.host.should == 'test.com'
+      expect(subject.actionkit.client.connection.configuration.host).to eq('test.com')
     end
   end
 
@@ -23,7 +23,7 @@ describe TokyoApi::Actionkit do
       let(:body) { fixture('responses/full_user_error') }
 
       it 'should find an organisation' do
-        subject.actionkit.full_user('1').should == {'error' => 'Connection refused'}
+        expect(subject.actionkit.full_user('1')).to eq({'error' => 'Connection refused'})
       end
     end
 
@@ -31,13 +31,13 @@ describe TokyoApi::Actionkit do
       let(:body) { fixture('responses/full_user_success') } #TODO: actually figure out what this returns.
 
       it 'should find an organisation' do
-        subject.actionkit.full_user('1').should == nil
+        expect(subject.actionkit.full_user('1')).to eq(nil)
       end
     end
 
     describe 'user_path' do
       it "should return relative path to user API endpoint" do
-        subject.actionkit.user_path('abc.123.xyz').should == '/actionkit/user/abc.123.xyz'
+        expect(subject.actionkit.user_path('abc.123.xyz')).to eq('/actionkit/user/abc.123.xyz')
       end
     end
   end

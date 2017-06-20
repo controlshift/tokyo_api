@@ -5,7 +5,7 @@ describe TokyoApi::Bluestatedigital do
 
   describe 'configuration' do
     it 'should propagate the host' do
-      subject.bluestatedigital.client.connection.configuration.host.should == 'test.com'
+      expect(subject.bluestatedigital.client.connection.configuration.host).to eq('test.com')
     end
   end
 
@@ -23,7 +23,7 @@ describe TokyoApi::Bluestatedigital do
       let(:body) { fixture('responses/full_user_error') }
 
       it 'should find an organisation' do
-        subject.bluestatedigital.full_user('1').should == {'error' => 'Connection refused'}
+        expect(subject.bluestatedigital.full_user('1')).to eq({'error' => 'Connection refused'})
       end
     end
 
@@ -31,14 +31,14 @@ describe TokyoApi::Bluestatedigital do
       let(:body) { fixture('responses/full_user_success') } #TODO: actually figure out what this returns.
 
       it 'should find an organisation' do
-        subject.bluestatedigital.full_user('1').should == nil
+        expect(subject.bluestatedigital.full_user('1')).to eq(nil)
       end
     end
   end
 
   describe 'tokyo_blue_state_digital_user_path' do
     it "should return rooted relative path to tokyo user API endpoint" do
-      subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456').should == '/bluestatedigital/constituent/-123456'
+      expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456')).to eq('/bluestatedigital/constituent/-123456')
     end
   end
 end

@@ -16,7 +16,7 @@ describe TokyoApi::Expire do
       let(:status) { 200 }  
 
       it 'should find an organisation' do
-        subject.expire.organisation('foo.com').should == {'status' => 'success'}
+        expect(subject.expire.organisation('foo.com')).to eq({'status' => 'success'})
       end
     end
   end
