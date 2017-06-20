@@ -22,16 +22,17 @@ describe TokyoApi::Identity do
     describe 'error' do
       let(:body) { fixture('responses/full_user_error') }
 
-      it 'should find an organisation' do
+      it 'should return an error hash' do
         expect(subject.identity.full_user('1')).to eq({'error' => 'Connection refused'})
       end
     end
 
-    describe 'error' do
-      let(:body) { fixture('responses/full_user_success') } #TODO: actually figure out what this returns.
+    describe 'success' do
+      let(:body) { fixture('responses/identity/full_user_success') }
 
-      it 'should find an organisation' do
-        expect(subject.identity.full_user('1')).to eq(nil)
+      it 'should return a hash' do
+        expect(subject.identity.full_user('1')).to eq({'first_name' => 'Homer', 'last_name' => 'Simpson',
+                                                       'country' => 'GB', 'postal' => '12345', 'email' => 'foo@bar.com' })
       end
     end
   end

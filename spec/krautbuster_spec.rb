@@ -22,16 +22,17 @@ describe TokyoApi::Krautbuster do
     describe 'error' do
       let(:body) { fixture('responses/full_user_error') }
 
-      it 'should find an organisation' do
+      it 'should return an error message' do
         expect(subject.krautbuster.full_user('123abc456')).to eq({'error' => 'Connection refused'})
       end
     end
 
-    describe 'error' do
-      let(:body) { fixture('responses/full_user_success') }
+    describe 'success' do
+      let(:body) { fixture('responses/krautbuster/full_user_success') }
 
       it 'should find an organisation' do
-        expect(subject.krautbuster.full_user('123abc456')).to be_nil
+        expect(subject.krautbuster.full_user('123abc456')).to eq({'first_name' => 'Homer', 'last_name' => 'Simpson',
+                                                                  'country' => 'DE', 'postal' => '12345', 'email' => 'foo@bar.com' })
       end
     end
   end
