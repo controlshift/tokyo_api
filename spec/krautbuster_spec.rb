@@ -30,9 +30,27 @@ describe TokyoApi::Krautbuster do
     describe 'success' do
       let(:body) { fixture('responses/krautbuster/full_user_success') }
 
-      it 'should find an organisation' do
+      it 'should find an full_user hash' do
         expect(subject.krautbuster.full_user('123abc456')).to eq({'first_name' => 'Homer', 'last_name' => 'Simpson',
                                                                   'country' => 'DE', 'postal' => '12345', 'email' => 'foo@bar.com' })
+      end
+    end
+
+    describe 'not found' do
+      let(:body) { fixture('responses/krautbuster/not_found') }
+      let(:status) { 404 }
+
+      it 'should return nil when user is not present' do
+        expect(subject.krautbuster.full_user('123abc456')).to be_nil
+      end
+    end
+
+    describe 'exception circumstance' do
+      let(:body) {''}
+      let(:status) { 500 }
+
+      it 'should raise when remote service returns 500' do
+        expect { subject.krautbuster.full_user('123abc456') }.to raise_error(Vertebrae::ResponseError)
       end
     end
   end

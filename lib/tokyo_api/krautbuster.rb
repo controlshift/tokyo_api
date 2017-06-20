@@ -5,7 +5,16 @@ module TokyoApi
     end
 
     def full_user(session_id)
-      client.get_request("#{normalized_base_path}full_user/#{session_id}").body
+      begin
+        client.get_request("#{normalized_base_path}full_user/#{session_id}").body
+      rescue Vertebrae::ResponseError => e
+        # Status 404 is expected in these calls
+        if e.status_code == 404
+          return nil
+        end
+
+        raise
+      end
     end
 
     def session_status(session_id)
