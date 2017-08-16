@@ -38,8 +38,16 @@ describe TokyoApi::Actionkit do
     end
 
     describe 'user_path' do
-      it "should return relative path to user API endpoint" do
-        expect(subject.actionkit.user_path('abc.123.xyz')).to eq('/actionkit/user/abc.123.xyz')
+      context 'phone not required' do
+        it "should return relative path to user API endpoint" do
+          expect(subject.actionkit.user_path('abc.123.xyz', false)).to eq('/actionkit/user/abc.123.xyz?phone_required=false')
+        end
+      end
+
+      context 'phone required' do
+        it "should return relative path to user API endpoint" do
+          expect(subject.actionkit.user_path('abc.123.xyz', true)).to eq('/actionkit/user/abc.123.xyz?phone_required=true')
+        end
       end
     end
   end

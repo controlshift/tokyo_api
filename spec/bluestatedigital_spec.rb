@@ -39,8 +39,16 @@ describe TokyoApi::Bluestatedigital do
   end
 
   describe 'tokyo_blue_state_digital_user_path' do
-    it "should return rooted relative path to tokyo user API endpoint" do
-      expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456')).to eq('/bluestatedigital/constituent/-123456')
+    context 'phone not required' do
+      it "should return rooted relative path to tokyo user API endpoint" do
+        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', false)).to eq('/bluestatedigital/constituent/-123456?phone_required=false')
+      end
+    end
+
+    context 'phone required' do
+      it "should return rooted relative path to tokyo user API endpoint" do
+        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', true)).to eq('/bluestatedigital/constituent/-123456?phone_required=true')
+      end
     end
   end
 end

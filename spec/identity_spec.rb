@@ -38,8 +38,16 @@ describe TokyoApi::Identity do
   end
 
   describe 'tokyo_identity_user_path' do
-    it 'should return rooted relative path to tokyo user API endpoint' do
-      expect(subject.identity.tokyo_identity_user_path('-123456')).to eq('/identity/user/-123456')
+    context 'phone not required' do
+      it 'should return rooted relative path to tokyo user API endpoint' do
+        expect(subject.identity.tokyo_identity_user_path('-123456', false)).to eq('/identity/user/-123456?phone_required=false')
+      end
+    end
+
+    context 'phone required' do
+      it 'should return rooted relative path to tokyo user API endpoint' do
+        expect(subject.identity.tokyo_identity_user_path('-123456', true)).to eq('/identity/user/-123456?phone_required=true')
+      end
     end
   end
 end
