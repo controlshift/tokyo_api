@@ -9,5 +9,5 @@ group :development do
   gem 'webmock'
   gem 'byebug'
   gem "bundler"
-  gem "juwelier", "~> 2.1.0"
+  gem "juwelier"
 end
