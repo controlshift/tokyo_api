@@ -39,15 +39,15 @@ describe TokyoApi::Bluestatedigital do
   end
 
   describe 'tokyo_blue_state_digital_user_path' do
-    context 'phone not required' do
+    context 'without required_fields' do
       it "should return rooted relative path to tokyo user API endpoint" do
-        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', false)).to eq('/bluestatedigital/constituent/-123456?phone_required=false')
+        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456')).to eq('/bluestatedigital/constituent/-123456')
       end
     end
 
-    context 'phone required' do
+    context 'with required_fields' do
       it "should return rooted relative path to tokyo user API endpoint" do
-        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', true)).to eq('/bluestatedigital/constituent/-123456?phone_required=true')
+        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', required_fields: [:first_name, :last_name, :email, :postal, :phone])).to eq('/bluestatedigital/constituent/-123456?required_fields=first_name,last_name,email,postal,phone')
       end
     end
   end

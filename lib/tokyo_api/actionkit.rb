@@ -8,8 +8,12 @@ module TokyoApi
       client.get_request("#{normalized_base_path}full_user/#{id}").body
     end
 
-    def user_path(id, phone_required)
-      "/#{normalized_base_path}user/#{id}?phone_required=#{phone_required}"
+    def user_path(id, required_fields: nil)
+      path = "/#{normalized_base_path}user/#{id}"
+      unless required_fields.nil?
+        path << "?required_fields=#{required_fields.join(',')}"
+      end
+      path
     end
   end
 end

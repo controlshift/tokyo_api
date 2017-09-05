@@ -71,8 +71,16 @@ describe TokyoApi::Krautbuster do
   end
 
   describe '#user_path' do
-    it "should return relative path to user API endpoint" do
-      expect(subject.krautbuster.user_path('123abc456', 'save-the-trees')).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees'
+    context 'without required_fields' do
+      it "should return relative path to user API endpoint" do
+        expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees')).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees'
+      end
+    end
+
+    context 'with required_fields' do
+      it "should return relative path to user API endpoint" do
+        expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees', required_fields: [:first_name, :last_name, :email])).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees&required_fields=first_name,last_name,email'
+      end
     end
   end
 

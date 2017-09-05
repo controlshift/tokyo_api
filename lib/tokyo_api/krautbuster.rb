@@ -25,8 +25,12 @@ module TokyoApi
       end
     end
 
-    def user_path(session_id, petition_id)
-      "/#{normalized_base_path}user/#{session_id}?petition_id=#{petition_id}"
+    def user_path(session_id, petition_id:, required_fields: nil)
+      path = "/#{normalized_base_path}user/#{session_id}?petition_id=#{petition_id}"
+      unless required_fields.nil?
+        path << "&required_fields=#{required_fields.join(',')}"
+      end
+      path
     end
 
     def subscription_status_path(token)
