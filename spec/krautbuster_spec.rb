@@ -81,6 +81,10 @@ describe TokyoApi::Krautbuster do
       it "should return relative path to user API endpoint" do
         expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees', required_fields: [:first_name, :last_name, :email])).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees&required_fields=first_name,last_name,email'
       end
+
+      it 'should url-escape field names with weird characters' do
+        expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees', required_fields: ['email', 'fish & chips'])).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees&required_fields=email,fish+%26+chips'
+      end
     end
   end
 

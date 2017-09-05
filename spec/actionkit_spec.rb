@@ -48,6 +48,10 @@ describe TokyoApi::Actionkit do
         it "should return relative path to user API endpoint" do
           expect(subject.actionkit.user_path('abc.123.xyz', required_fields: [:first_name, :last_name, :email, :postal, :phone])).to eq('/actionkit/user/abc.123.xyz?required_fields=first_name,last_name,email,postal,phone')
         end
+
+        it 'should url-escape field names with weird characters' do
+          expect(subject.actionkit.user_path('abc.123.xyz', required_fields: ['email', 'fish & chips'])).to eq('/actionkit/user/abc.123.xyz?required_fields=email,fish+%26+chips')
+        end
       end
     end
   end

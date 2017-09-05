@@ -49,6 +49,10 @@ describe TokyoApi::Bluestatedigital do
       it "should return rooted relative path to tokyo user API endpoint" do
         expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', required_fields: [:first_name, :last_name, :email, :postal, :phone])).to eq('/bluestatedigital/constituent/-123456?required_fields=first_name,last_name,email,postal,phone')
       end
+
+      it 'should url-escape field names with weird characters' do
+        expect(subject.bluestatedigital.tokyo_blue_state_digital_user_path('-123456', required_fields: ['email', 'fish & chips'])).to eq('/bluestatedigital/constituent/-123456?required_fields=email,fish+%26+chips')
+      end
     end
   end
 end

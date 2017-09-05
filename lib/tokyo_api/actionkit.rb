@@ -11,7 +11,7 @@ module TokyoApi
     def user_path(id, required_fields: nil)
       path = "/#{normalized_base_path}user/#{id}"
       unless required_fields.nil?
-        path << "?required_fields=#{required_fields.join(',')}"
+        path << "?required_fields=#{required_fields.collect{|v| CGI.escape(v.to_s)}.join(',')}"
       end
       path
     end
