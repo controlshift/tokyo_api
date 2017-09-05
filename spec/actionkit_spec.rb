@@ -38,15 +38,19 @@ describe TokyoApi::Actionkit do
     end
 
     describe 'user_path' do
-      context 'phone not required' do
+      context 'without required_fields' do
         it "should return relative path to user API endpoint" do
-          expect(subject.actionkit.user_path('abc.123.xyz', false)).to eq('/actionkit/user/abc.123.xyz?phone_required=false')
+          expect(subject.actionkit.user_path('abc.123.xyz')).to eq('/actionkit/user/abc.123.xyz')
         end
       end
 
-      context 'phone required' do
+      context 'with required_fields' do
         it "should return relative path to user API endpoint" do
-          expect(subject.actionkit.user_path('abc.123.xyz', true)).to eq('/actionkit/user/abc.123.xyz?phone_required=true')
+          expect(subject.actionkit.user_path('abc.123.xyz', required_fields: [:first_name, :last_name, :email, :postal, :phone])).to eq('/actionkit/user/abc.123.xyz?required_fields=first_name,last_name,email,postal,phone')
+        end
+
+        it 'should url-escape field names with weird characters' do
+          expect(subject.actionkit.user_path('abc.123.xyz', required_fields: ['email', 'fish & chips'])).to eq('/actionkit/user/abc.123.xyz?required_fields=email,fish+%26+chips')
         end
       end
     end
