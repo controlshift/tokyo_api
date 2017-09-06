@@ -5,7 +5,7 @@ module TokyoApi
     end
 
     def organisation(host)
-      client.get_request("#{normalized_base_path}organisation/#{host}").body
+      client.get_request("#{normalized_base_path}organisation/#{url_escape(host)}").body
     end
   end
 end
