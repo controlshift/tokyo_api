@@ -5,7 +5,7 @@ module TokyoApi
     end
 
     def url_escape(string)
-      CGI.escape(string)
+      CGI.escape(string.to_s)
     end
 
     def required_fields_param(required_fields)
