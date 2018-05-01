@@ -54,4 +54,11 @@ describe TokyoApi::Identity do
       end
     end
   end
+
+  describe '#subscription_status_path' do
+    it 'should return correct path' do
+      expected_path = '/identity/subscription_status/abc123?opt_in_external_id=policy-1.5'
+      expect(subject.identity.subscription_status_path('abc123', opt_in_external_id: 'policy-1.5')).to eq expected_path
+    end
+  end
 end

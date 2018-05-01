@@ -16,5 +16,9 @@ module TokyoApi
       end
       path
     end
+
+    def subscription_status_path(id, opt_in_external_id:)
+      path = "/#{normalized_base_path}subscription_status/#{url_escape(id)}?opt_in_external_id=#{url_escape(opt_in_external_id)}"
+    end
   end
 end
