@@ -17,8 +17,14 @@ module TokyoApi
       path
     end
 
-    def subscription_status_path(id, opt_in_external_id:)
+    def subscription_status_path(id, opt_in_external_id:, minimum_consent_level: nil)
       path = "/#{normalized_base_path}subscription_status/#{url_escape(id)}?opt_in_external_id=#{url_escape(opt_in_external_id)}"
+
+      if minimum_consent_level
+        path = "#{path}&minimum_consent_level=#{url_escape(minimum_consent_level)}"
+      end
+
+      path
     end
   end
 end
