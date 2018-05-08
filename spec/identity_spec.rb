@@ -56,7 +56,17 @@ describe TokyoApi::Identity do
   end
 
   describe '#subscription_status_path' do
-    it 'should return correct path' do
+    it 'should raise if neither param provided' do
+      expect { subject.identity.subscription_status_path('abc123') }.to raise_error(RuntimeError)
+    end
+
+    it 'should return correct path for a list of public ids' do
+      expected_path = '/identity/subscription_status/abc123?opt_in_public_ids=policy-1.5%2Cpolicy-1.6'
+      expect(subject.identity.subscription_status_path('abc123', opt_in_public_ids: ['policy-1.5', 'policy-1.6'])).to eq expected_path
+    end
+
+
+    it 'should return correct path for a specific external id' do
       expected_path = '/identity/subscription_status/abc123?opt_in_external_id=policy-1.5'
       expect(subject.identity.subscription_status_path('abc123', opt_in_external_id: 'policy-1.5')).to eq expected_path
     end
