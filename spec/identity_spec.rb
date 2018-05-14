@@ -53,6 +53,40 @@ describe TokyoApi::Identity do
         expect(subject.identity.tokyo_identity_user_path('-123456', required_fields: ['email', 'fish & chips'])).to eq('/identity/user/-123456?required_fields=email,fish+%26+chips')
       end
     end
+
+    context 'with_subscription_status and associated arguments' do
+      it 'should not include query string parameter if argument is missing' do
+        expect(subject.identity.tokyo_identity_user_path('123abc456')).not_to match /.+with_subscription_status=.+/
+      end
+
+      it 'should not include query string parameter if argument is false' do
+        expect(subject.identity.tokyo_identity_user_path('123abc456', with_subscription_status: false)).not_to match /.+with_subscription_status=.+/
+      end
+
+      it 'should not include opt_in_public_ids and minimum_consent_level if with_subscription_status is false' do
+        tokyo_path = subject.identity.tokyo_identity_user_path('123abc456',
+                                                                with_subscription_status: false,
+                                                                opt_in_public_ids: ['policy-1.5'],
+                                                                minimum_consent_level: 'explicit')
+
+        expect(tokyo_path).not_to match /.+opt_in_public_ids=.+/
+        expect(tokyo_path).not_to match /.+minimum_consent_level=.+/
+      end
+
+      it 'should include query string parameter if argument is true' do
+        expect(subject.identity.tokyo_identity_user_path('123abc456', with_subscription_status: true)).to match /.+with_subscription_status=.+/
+      end
+
+      it 'should include opt_in_public_ids and minimum_consent_level if with_subscription_status is true' do
+        tokyo_path = subject.identity.tokyo_identity_user_path('123abc456',
+                                                                with_subscription_status: true,
+                                                                opt_in_public_ids: ['policy-1.5'],
+                                                                minimum_consent_level: 'explicit')
+
+        expect(tokyo_path).to match /.+opt_in_public_ids=.+/
+        expect(tokyo_path).to match /.+minimum_consent_level=.+/
+      end
+    end
   end
 
   describe '#subscription_status_path' do
