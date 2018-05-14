@@ -86,6 +86,20 @@ describe TokyoApi::Krautbuster do
         expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees', required_fields: ['email', 'fish & chips'])).to eq '/krautbuster/user/123abc456?petition_id=save-the-trees&required_fields=email,fish+%26+chips'
       end
     end
+
+    context 'with_subscription_status argument' do
+      it 'should not include query string parameter if argument is missing' do
+        expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees')).not_to match /.+with_subscription_status=.+/
+      end
+
+      it 'should not include query string parameter if argument is false' do
+        expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees', with_subscription_status: false)).not_to match /.+with_subscription_status=.+/
+      end
+
+      it 'should include query string parameter if argument is true' do
+        expect(subject.krautbuster.user_path('123abc456', petition_id: 'save-the-trees', with_subscription_status: true)).to match /.+with_subscription_status=true.*/
+      end
+    end
   end
 
   describe '#subscription_status_path' do
