@@ -65,15 +65,9 @@ describe TokyoApi::Identity do
       expect(subject.identity.subscription_status_path('abc123', opt_in_public_ids: ['policy-1.5', 'policy-1.6'])).to eq expected_path
     end
 
-
-    it 'should return correct path for a specific external id' do
-      expected_path = '/identity/subscription_status/abc123?opt_in_external_id=policy-1.5'
-      expect(subject.identity.subscription_status_path('abc123', opt_in_external_id: 'policy-1.5')).to eq expected_path
-    end
-
     it 'should support minimum_consent_level' do
-      expected_path = '/identity/subscription_status/abc123?opt_in_external_id=policy-1.5&minimum_consent_level=explicit'
-      expect(subject.identity.subscription_status_path('abc123', opt_in_external_id: 'policy-1.5', minimum_consent_level: 'explicit')).to eq expected_path
+      expected_path = '/identity/subscription_status/abc123?opt_in_public_ids=policy-1.5&minimum_consent_level=explicit'
+      expect(subject.identity.subscription_status_path('abc123', opt_in_public_ids: ['policy-1.5'], minimum_consent_level: 'explicit')).to eq expected_path
     end
   end
 end

@@ -17,16 +17,10 @@ module TokyoApi
       path
     end
 
-    def subscription_status_path(id, opt_in_external_id: nil, opt_in_public_ids: nil, minimum_consent_level: nil)
-      if opt_in_public_ids.nil? && opt_in_external_id.nil?
-        raise 'must provide either opt_in_public_ids or opt_in_external_id'
-      end
+    def subscription_status_path(id, opt_in_public_ids: nil, minimum_consent_level: nil)
+      raise 'must provide opt_in_public_ids' if opt_in_public_ids.nil?
 
-      if opt_in_external_id.present?
-        path = "/#{normalized_base_path}subscription_status/#{url_escape(id)}?opt_in_external_id=#{url_escape(opt_in_external_id)}"
-      else
-        path = "/#{normalized_base_path}subscription_status/#{url_escape(id)}?opt_in_public_ids=#{url_escape(opt_in_public_ids.join(','))}"
-      end
+      path = "/#{normalized_base_path}subscription_status/#{url_escape(id)}?opt_in_public_ids=#{url_escape(opt_in_public_ids.join(','))}"
 
       if minimum_consent_level
         path = "#{path}&minimum_consent_level=#{url_escape(minimum_consent_level)}"
