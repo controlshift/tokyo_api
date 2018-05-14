@@ -79,12 +79,15 @@ describe TokyoApi::Identity do
 
       it 'should include opt_in_public_ids and minimum_consent_level if with_subscription_status is true' do
         tokyo_path = subject.identity.tokyo_identity_user_path('123abc456',
+                                                                required_fields: [:first_name, :last_name, :email, :postal, :phone],
                                                                 with_subscription_status: true,
                                                                 opt_in_public_ids: ['policy-1.5'],
                                                                 minimum_consent_level: 'explicit')
 
+        expect(tokyo_path).to match /.+with_subscription_status=true.*/
         expect(tokyo_path).to match /.+opt_in_public_ids=.+/
         expect(tokyo_path).to match /.+minimum_consent_level=.+/
+        expect { URI::parse(tokyo_path) }.not_to raise_error
       end
     end
   end

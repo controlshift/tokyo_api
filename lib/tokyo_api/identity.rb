@@ -11,16 +11,21 @@ module TokyoApi
     def tokyo_identity_user_path(id, with_subscription_status: false, required_fields: nil, opt_in_public_ids: nil, minimum_consent_level: nil)
       path = "/#{normalized_base_path}user/#{url_escape(id)}"
 
+      params = []
       unless required_fields.nil?
-        path << "?#{required_fields_param(required_fields)}"
+        params << required_fields_param(required_fields)
       end
 
       if with_subscription_status
-        path << '?with_subscription_status=true'
+        params << 'with_subscription_status=true'
         additional_subscription_parameters = path_for_subscription_status_params(opt_in_public_ids, minimum_consent_level)
         unless additional_subscription_parameters.blank?
-          path << "&#{additional_subscription_parameters}"
+          params << additional_subscription_parameters
         end
+      end
+
+      if params.any?
+        path << "?#{params.join('&')}"
       end
 
       path
