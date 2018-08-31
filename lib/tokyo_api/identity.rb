@@ -18,14 +18,10 @@ module TokyoApi
 
       if with_subscription_status
         params << 'with_subscription_status=true'
-        additional_subscription_parameters = path_for_subscription_status_params(opt_in_public_ids, minimum_consent_level)
+        additional_subscription_parameters = path_for_subscription_status_params(opt_in_public_ids, minimum_consent_level, encrypted)
         unless additional_subscription_parameters.blank?
           params << additional_subscription_parameters
         end
-      end
-
-      if encrypted
-        params << 'encrypted=1'
       end
 
       if params.any?
@@ -38,12 +34,7 @@ module TokyoApi
     def subscription_status_path(id, opt_in_public_ids: nil, minimum_consent_level: nil, encrypted: nil)
       raise 'must provide opt_in_public_ids' if opt_in_public_ids.nil?
 
-      path = "/#{normalized_base_path}subscription_status/#{url_escape(id)}?#{path_for_subscription_status_params(opt_in_public_ids, minimum_consent_level)}"
-      if encrypted
-        path << '&encrypted=1'
-      end
-
-      path
+      "/#{normalized_base_path}subscription_status/#{url_escape(id)}?#{path_for_subscription_status_params(opt_in_public_ids, minimum_consent_level, encrypted)}"
     end
 
     private
@@ -60,7 +51,7 @@ module TokyoApi
       end
 
       if encrypted
-        path << "&encrypted=#{encrypted}"
+        path << "&encrypted=1"
       end
 
       path
