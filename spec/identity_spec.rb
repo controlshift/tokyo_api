@@ -77,6 +77,10 @@ describe TokyoApi::Identity do
         expect(subject.identity.tokyo_identity_user_path('123abc456', with_subscription_status: true)).to match /.+with_subscription_status=.+/
       end
 
+      it 'should include encrypted parameter if argument is true' do
+        expect(subject.identity.tokyo_identity_user_path('123abc456', with_subscription_status: true, encrypted: true)).to match /.+encrypted=.+/
+      end
+
       it 'should include opt_in_public_ids and minimum_consent_level if with_subscription_status is true' do
         tokyo_path = subject.identity.tokyo_identity_user_path('123abc456',
                                                                 required_fields: [:first_name, :last_name, :email, :postal, :phone],
@@ -105,6 +109,11 @@ describe TokyoApi::Identity do
     it 'should support minimum_consent_level' do
       expected_path = '/identity/subscription_status/abc123?opt_in_public_ids=policy-1.5&minimum_consent_level=explicit'
       expect(subject.identity.subscription_status_path('abc123', opt_in_public_ids: ['policy-1.5'], minimum_consent_level: 'explicit')).to eq expected_path
+    end
+
+    it 'should support encrypted param' do
+      expected_path = '/identity/subscription_status/abc123?opt_in_public_ids=policy-1.5&minimum_consent_level=explicit&encrypted=1'
+      expect(subject.identity.subscription_status_path('abc123', opt_in_public_ids: ['policy-1.5'], minimum_consent_level: 'explicit', encrypted: true)).to eq expected_path
     end
   end
 end
