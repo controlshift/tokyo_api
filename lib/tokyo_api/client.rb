@@ -12,6 +12,10 @@ module TokyoApi
       @krautbuster ||= TokyoApi::Krautbuster.new(client: self)
     end
 
+    def campact
+      @campact ||= TokyoApi::Campact.new(client: self)
+    end
+
     def identity
       @identity ||= TokyoApi::Identity.new(client: self)
     end
