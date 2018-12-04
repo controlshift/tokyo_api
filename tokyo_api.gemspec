@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Nathan Woodhull".freeze]
-  s.date = "2018-09-04"
+  s.date = "2018-12-04"
   s.description = "Tokyo is a CRM middleware, this gem helps apps talk to it.".freeze
   s.email = "nathan@controlshiftlabs.com".freeze
   s.extra_rdoc_files = [
@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
     ".ruby-version",
     ".travis.yml",
     "Gemfile",
-    "Gemfile.lock",
     "LICENSE.txt",
     "README.md",
     "Rakefile",
@@ -68,14 +67,14 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<vertebrae>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<vertebrae>.freeze, ["~> 0.4.3"])
       s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
       s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
       s.add_development_dependency(%q<byebug>.freeze, [">= 0"])
       s.add_development_dependency(%q<bundler>.freeze, [">= 0"])
       s.add_development_dependency(%q<juwelier>.freeze, [">= 0"])
     else
-      s.add_dependency(%q<vertebrae>.freeze, [">= 0"])
+      s.add_dependency(%q<vertebrae>.freeze, ["~> 0.4.3"])
       s.add_dependency(%q<rspec>.freeze, [">= 0"])
       s.add_dependency(%q<webmock>.freeze, [">= 0"])
       s.add_dependency(%q<byebug>.freeze, [">= 0"])
@@ -83,7 +82,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<juwelier>.freeze, [">= 0"])
     end
   else
-    s.add_dependency(%q<vertebrae>.freeze, [">= 0"])
+    s.add_dependency(%q<vertebrae>.freeze, ["~> 0.4.3"])
     s.add_dependency(%q<rspec>.freeze, [">= 0"])
     s.add_dependency(%q<webmock>.freeze, [">= 0"])
     s.add_dependency(%q<byebug>.freeze, [">= 0"])
