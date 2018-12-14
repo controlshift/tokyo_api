@@ -109,4 +109,42 @@ describe TokyoApi::Campact do
       expect(subject.subscription_status_path('abc123')).to eq '/campact/subscription_status/abc123'
     end
   end
+
+  describe '#session_status' do
+    let(:client) { double }
+    let(:session_id) { '123456789abcdef' }
+
+    subject { TokyoApi::Campact.new(client: client) }
+
+    it 'should perform request on session status path' do
+      expect(client).to receive(:get_request).with("/campact/session/#{session_id}/status").and_return(double(body: { hard_login: false, soft_login: true }))
+
+      session_status = subject.session_status(session_id)
+
+      expect(session_status).to eq({ hard_login: false, soft_login: true })
+    end
+  end
+
+  describe '#destroy_session' do
+    let(:client) { double }
+    let(:session_id) { '123456789abcdef' }
+
+    subject { TokyoApi::Campact.new(client: client) }
+
+    it 'should perform request on session status path' do
+      expect(client).to receive(:delete_request).with("/campact/session/#{session_id}").and_return(double(status: 204))
+
+      result = subject.destroy_session(session_id)
+
+      expect(result).to be_truthy
+    end
+
+    it 'should return false if response status is 404' do
+      expect(client).to receive(:delete_request).with("/campact/session/#{session_id}").and_return(double(status: 404))
+
+      result = subject.destroy_session(session_id)
+
+      expect(result).to be_falsey
+    end
+  end
 end

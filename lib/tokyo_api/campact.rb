@@ -9,7 +9,11 @@ module TokyoApi
     end
 
     def session_status(session_id)
-      client.get_request("#{normalized_base_path}session_status/#{url_escape(session_id)}").body
+      client.get_request("/#{normalized_base_path}session/#{url_escape(session_id)}/status").body
+    end
+
+    def destroy_session(session_id)
+      client.delete_request("/#{normalized_base_path}session/#{url_escape(session_id)}").status == 204
     end
 
     def subscription_status(token)
