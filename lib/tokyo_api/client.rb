@@ -8,10 +8,6 @@ module TokyoApi
       @bluestatedigital ||= TokyoApi::Bluestatedigital.new(client: self)
     end
 
-    def krautbuster
-      @krautbuster ||= TokyoApi::Krautbuster.new(client: self)
-    end
-
     def campact
       @campact ||= TokyoApi::Campact.new(client: self)
     end
