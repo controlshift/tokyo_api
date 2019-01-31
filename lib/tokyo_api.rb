@@ -6,7 +6,6 @@ require 'tokyo_api/campact'
 require 'tokyo_api/client'
 require 'tokyo_api/expire'
 require 'tokyo_api/identity'
-require 'tokyo_api/krautbuster'
 
 module TokyoApi
   extend Vertebrae::Base
