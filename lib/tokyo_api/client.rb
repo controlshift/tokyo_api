@@ -4,9 +4,13 @@ module TokyoApi
       @actionkit ||= TokyoApi::Actionkit.new(client: self)
     end
 
+    alias_method :action_kit, :actionkit
+
     def bluestatedigital
       @bluestatedigital ||= TokyoApi::Bluestatedigital.new(client: self)
     end
+
+    alias_method :blue_state_digital, :bluestatedigital
 
     def campact
       @campact ||= TokyoApi::Campact.new(client: self)
