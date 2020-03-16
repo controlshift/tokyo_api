@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe TokyoApi::Client do
-  describe 'initialization' do
+  describe 'initialisation' do
     subject { described_class.new(options) }
 
     context 'with a basic_auth string parameter' do
