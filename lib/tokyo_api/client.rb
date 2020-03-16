@@ -26,11 +26,17 @@ module TokyoApi
 
 
     def default_options
-      {
+      opts = {
         user_agent: 'TokyoApi Gem',
         prefix: '',
         content_type: 'application/json'
       }
+
+      if initialisation_options.has_key?(:timeout)
+        opts[:connection_options] = {request: {timeout: initialisation_options[:timeout]}}
+      end
+
+      opts
     end
 
     def request(method, path, params, options) # :nodoc:
