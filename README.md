@@ -7,7 +7,7 @@ A ruby gem for communicating with ControlShift's Tokyo API.
 ## Usage
 
 ```ruby
-ta = TokyoApi.new(host: 'localhost:9000', username: 'tokyo', password: 'Passw0rd!', scheme: 'http')
+ta = TokyoApi.new(host: 'localhost:9000', username: 'tokyo', password: 'Passw0rd!', scheme: 'http', timeout: 5)
 ta.organisation.expire('foo.com')
 ```
 
