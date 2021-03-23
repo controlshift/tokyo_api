@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/spec_helper")
 
 describe TokyoApi::Actionkit do
   subject { TokyoApi.new(host: 'test.com') }
@@ -15,15 +17,15 @@ describe TokyoApi::Actionkit do
     let(:status) { 200 }
 
     before(:each) do
-     stub_get(request_path).to_return(:body => body, :status => status,
-                                     :headers => { content_type: "application/json; charset=utf-8"})
+      stub_get(request_path).to_return(body: body, status: status,
+                                       headers: { content_type: 'application/json; charset=utf-8' })
     end
 
     describe 'error' do
       let(:body) { fixture('responses/full_user_error') }
 
       it 'should return an error hash' do
-        expect(subject.actionkit.full_user('1')).to eq({'error' => 'Connection refused'})
+        expect(subject.actionkit.full_user('1')).to eq({ 'error' => 'Connection refused' })
       end
     end
 
@@ -39,18 +41,22 @@ describe TokyoApi::Actionkit do
 
     describe 'user_path' do
       context 'without required_fields' do
-        it "should return relative path to user API endpoint" do
+        it 'should return relative path to user API endpoint' do
           expect(subject.actionkit.user_path('abc.123.xyz')).to eq('/actionkit/user/abc.123.xyz')
         end
       end
 
       context 'with required_fields' do
-        it "should return relative path to user API endpoint" do
-          expect(subject.actionkit.user_path('abc.123.xyz', required_fields: [:first_name, :last_name, :email, :postal, :phone])).to eq('/actionkit/user/abc.123.xyz?required_fields=first_name,last_name,email,postal,phone')
+        it 'should return relative path to user API endpoint' do
+          expect(subject.actionkit.user_path('abc.123.xyz',
+                                             required_fields: %i[first_name last_name email postal
+                                                                 phone])).to eq('/actionkit/user/abc.123.xyz?required_fields=first_name,last_name,email,postal,phone')
         end
 
         it 'should url-escape field names with weird characters' do
-          expect(subject.actionkit.user_path('abc.123.xyz', required_fields: ['email', 'fish & chips'])).to eq('/actionkit/user/abc.123.xyz?required_fields=email,fish+%26+chips')
+          expect(subject.actionkit.user_path('abc.123.xyz',
+                                             required_fields: ['email',
+                                                               'fish & chips'])).to eq('/actionkit/user/abc.123.xyz?required_fields=email,fish+%26+chips')
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TokyoApi
   class Base < Vertebrae::Model
     def normalized_base_path
@@ -10,7 +12,7 @@ module TokyoApi
 
     def required_fields_param(required_fields)
       if required_fields.present?
-        "required_fields=#{required_fields.collect{|v| url_escape(v.to_s)}.join(',')}"
+        "required_fields=#{required_fields.collect { |v| url_escape(v.to_s) }.join(',')}"
       else
         ''
       end
