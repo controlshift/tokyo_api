@@ -11,7 +11,7 @@ module TokyoApi
     end
 
     def tokyo_identity_user_path(id, with_subscription_status: false, required_fields: nil, opt_in_public_ids: nil, minimum_consent_level: nil, encrypted: nil)
-      path = "/#{normalized_base_path}user/#{url_escape(id)}"
+      path = String.new("/#{normalized_base_path}user/#{url_escape(id)}")
 
       params = []
       params << required_fields_param(required_fields) unless required_fields.nil?
@@ -39,9 +39,11 @@ module TokyoApi
     private
 
     def path_for_subscription_status_params(opt_in_public_ids, minimum_consent_level, encrypted = nil)
-      path = ''
-
-      path = "opt_in_public_ids=#{url_escape(opt_in_public_ids.join(','))}" if opt_in_public_ids.present?
+      path = if opt_in_public_ids.present?
+               String.new("opt_in_public_ids=#{url_escape(opt_in_public_ids.join(','))}")
+             else
+               String.new('')
+             end
 
       path << "&minimum_consent_level=#{url_escape(minimum_consent_level)}" if minimum_consent_level
 

@@ -28,7 +28,7 @@ module TokyoApi
     end
 
     def user_path(session_id, petition_id:, with_subscription_status: false, required_fields: nil)
-      path = "/#{normalized_base_path}user/#{url_escape(session_id)}?petition_id=#{url_escape(petition_id)}"
+      path = String.new("/#{normalized_base_path}user/#{url_escape(session_id)}?petition_id=#{url_escape(petition_id)}")
       path << '&with_subscription_status=true' if with_subscription_status
       path << "&#{required_fields_param(required_fields)}" unless required_fields.nil?
       path
