@@ -11,7 +11,7 @@ module TokyoApi
     end
 
     def user_path(id, required_fields: nil)
-      path = "/#{normalized_base_path}user/#{url_escape(id)}"
+      path = String.new("/#{normalized_base_path}user/#{url_escape(id)}")
       path << "?#{required_fields_param(required_fields)}" unless required_fields.nil?
       path
     end
