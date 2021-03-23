@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/spec_helper")
 
 describe TokyoApi::Expire do
   subject { TokyoApi.new(host: 'test.com') }
@@ -8,15 +10,15 @@ describe TokyoApi::Expire do
     let(:request_path) { '/expire/organisation/foo.com' }
 
     before(:each) do
-     stub_get(request_path).to_return(:body => body, :status => status,
-                                     :headers => { content_type: "application/json; charset=utf-8"})
+      stub_get(request_path).to_return(body: body, status: status,
+                                       headers: { content_type: 'application/json; charset=utf-8' })
     end
 
     describe 'success' do
-      let(:status) { 200 }  
+      let(:status) { 200 }
 
       it 'should find an organisation' do
-        expect(subject.expire.organisation('foo.com')).to eq({'status' => 'success'})
+        expect(subject.expire.organisation('foo.com')).to eq({ 'status' => 'success' })
       end
     end
   end

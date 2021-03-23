@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TokyoApi
   class Bluestatedigital < Base
     def base_path
@@ -10,9 +12,7 @@ module TokyoApi
 
     def tokyo_blue_state_digital_user_path(id, required_fields: nil)
       path = "/#{normalized_base_path}constituent/#{url_escape(id)}"
-      unless required_fields.nil?
-        path << "?#{required_fields_param(required_fields)}"
-      end
+      path << "?#{required_fields_param(required_fields)}" unless required_fields.nil?
       path
     end
   end

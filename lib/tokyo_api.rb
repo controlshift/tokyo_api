@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'vertebrae'
 require 'tokyo_api/base'
 require 'tokyo_api/actionkit'

@@ -1,11 +1,13 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/spec_helper")
 
 describe TokyoApi::Client do
   describe 'initialisation' do
     subject { described_class.new(options) }
 
     context 'with a basic_auth string parameter' do
-      let(:options) { {basic_auth: 'login:password'} }
+      let(:options) { { basic_auth: 'login:password' } }
 
       it 'should set username/password on the configuration' do
         config = subject.connection.configuration
@@ -15,7 +17,7 @@ describe TokyoApi::Client do
     end
 
     context 'with a timeout' do
-      let(:options) { {timeout: 5} }
+      let(:options) { { timeout: 5 } }
 
       it 'should set the timeout on the faraday options' do
         config = subject.connection.configuration

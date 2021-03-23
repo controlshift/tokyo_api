@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TokyoApi
   class Campact < Base
     def base_path
@@ -17,26 +19,18 @@ module TokyoApi
     end
 
     def subscription_status(token)
-      begin
-        client.get_request(subscription_status_path(token)).body
-      rescue Vertebrae::ResponseError => e
-        # Status 404 is expected in these calls
-        if e.status_code == 404
-          return nil
-        end
+      client.get_request(subscription_status_path(token)).body
+    rescue Vertebrae::ResponseError => e
+      # Status 404 is expected in these calls
+      return nil if e.status_code == 404
 
-        raise
-      end
+      raise
     end
 
     def user_path(session_id, petition_id:, with_subscription_status: false, required_fields: nil)
       path = "/#{normalized_base_path}user/#{url_escape(session_id)}?petition_id=#{url_escape(petition_id)}"
-      if with_subscription_status
-        path << '&with_subscription_status=true'
-      end
-      unless required_fields.nil?
-        path << "&#{required_fields_param(required_fields)}"
-      end
+      path << '&with_subscription_status=true' if with_subscription_status
+      path << "&#{required_fields_param(required_fields)}" unless required_fields.nil?
       path
     end
 

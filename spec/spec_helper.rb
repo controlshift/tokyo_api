@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
@@ -6,12 +8,12 @@ require 'tokyo_api'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.include WebMock::API
   config.color = true
-  #config.raise_errors_for_deprecations!
+  # config.raise_errors_for_deprecations!
 end
 
 def stub_get(path)
@@ -29,7 +31,7 @@ def stub_tokyo_request(method, path)
 end
 
 def fixture_path
-  File.expand_path("../fixtures", __FILE__)
+  File.expand_path('fixtures', __dir__)
 end
 
 def fixture(file)
