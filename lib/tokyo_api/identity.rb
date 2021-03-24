@@ -20,7 +20,7 @@ module TokyoApi
         params << 'with_subscription_status=true'
         additional_subscription_parameters = path_for_subscription_status_params(opt_in_public_ids,
                                                                                  minimum_consent_level, encrypted)
-        params << additional_subscription_parameters unless additional_subscription_parameters.blank?
+        params << additional_subscription_parameters if additional_subscription_parameters.present?
       end
 
       path << "?#{params.join('&')}" if params.any?
