@@ -8,12 +8,6 @@ module TokyoApi
 
     alias action_kit actionkit
 
-    def bluestatedigital
-      @bluestatedigital ||= TokyoApi::Bluestatedigital.new(client: self)
-    end
-
-    alias blue_state_digital bluestatedigital
-
     def campact
       @campact ||= TokyoApi::Campact.new(client: self)
     end
