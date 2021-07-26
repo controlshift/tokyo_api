@@ -1,8 +1,8 @@
-# tokyo_api
+# tokyo\_api
 
 A ruby gem for communicating with ControlShift's Tokyo API.
 
-[![Build Status](https://travis-ci.org/controlshift/tokyo_api.svg)](https://travis-ci.org/controlshift/tokyo_api)
+[![CI Status](https://github.com/controlshift/tokyo_api/actions/workflows/ci.yml/badge.svg)](https://github.com/controlshift/tokyo_api/actions/workflows/ci.yml)
 
 ## Usage
 
