@@ -10,18 +10,15 @@ module TokyoApi
       client.get_request("#{normalized_base_path}full_user/#{url_escape(id)}").body
     end
 
-    def tokyo_identity_user_path(id, with_subscription_status: false, required_fields: nil, opt_in_public_ids: nil, minimum_consent_level: nil, encrypted: nil)
+    def tokyo_identity_user_path(id, required_fields: nil, opt_in_public_ids: nil, minimum_consent_level: nil, encrypted: nil)
       path = String.new("/#{normalized_base_path}user/#{url_escape(id)}")
 
       params = []
       params << required_fields_param(required_fields) unless required_fields.nil?
 
-      if with_subscription_status
-        params << 'with_subscription_status=true'
-        additional_subscription_parameters = path_for_subscription_status_params(opt_in_public_ids,
-                                                                                 minimum_consent_level, encrypted)
-        params << additional_subscription_parameters if additional_subscription_parameters.present?
-      end
+      additional_subscription_parameters = path_for_subscription_status_params(opt_in_public_ids,
+                                                                               minimum_consent_level, encrypted)
+      params << additional_subscription_parameters if additional_subscription_parameters.present?
 
       path << "?#{params.join('&')}" if params.any?
 
