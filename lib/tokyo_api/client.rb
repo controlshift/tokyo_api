@@ -16,6 +16,10 @@ module TokyoApi
       @identity ||= TokyoApi::Identity.new(client: self)
     end
 
+    def external_image
+      @external_image ||= TokyoApi::ExternalImage.new(client: self)
+    end
+
     def expire
       @expire ||= TokyoApi::Expire.new(client: self)
     end
