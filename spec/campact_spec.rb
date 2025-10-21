@@ -117,6 +117,12 @@ describe TokyoApi::Campact do
     end
   end
 
+  describe '#update_prefill_forms_path' do
+    it 'should return relative path to prefill forms endpoint' do
+      expect(subject.campact.update_prefill_forms_path('123abc456')).to eq '/campact/user/123abc456/prefill_forms'
+    end
+  end
+
   describe '#subscription_status_path' do
     subject { TokyoApi::Campact.new }
 
