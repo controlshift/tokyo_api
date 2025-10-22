@@ -34,6 +34,10 @@ module TokyoApi
       path
     end
 
+    def update_prefill_forms_path(session_id)
+      String.new("/#{normalized_base_path}user/#{url_escape(session_id)}/prefill_forms")
+    end
+
     def subscription_status_path(token)
       "/#{normalized_base_path}subscription_status/#{url_escape(token)}"
     end
