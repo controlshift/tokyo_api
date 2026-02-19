@@ -2,6 +2,11 @@
 
 A ruby gem for communicating with ControlShift's Tokyo API.
 
+## Requirements
+
+- Ruby 3.3, 3.4, or 4.0
+- Faraday ~> 2.0
+
 [![CI Status](https://github.com/controlshift/tokyo_api/actions/workflows/ci.yml/badge.svg)](https://github.com/controlshift/tokyo_api/actions/workflows/ci.yml)
 
 ## Usage
