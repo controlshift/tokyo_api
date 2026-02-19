@@ -6,8 +6,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 Gem::Specification.new do |spec|
   spec.name          = 'tokyo_api'
   spec.version       = File.read(File.expand_path('VERSION', __dir__)).strip
-  spec.authors       = ['Nathan Woodhull']
-  spec.email         = ['nathan@controlshiftlabs.com']
+  spec.authors       = ['Nathan Woodhull', 'Owens Ehimen', 'Grey Moore', 'Diego Marcet']
+  spec.email         = ['talk@controlshiftlabs.com']
 
   spec.summary       = 'Ruby API Wrapper for Tokyo CRM service'
   spec.description   = 'Tokyo is a CRM middleware, this gem helps apps talk to it.'
