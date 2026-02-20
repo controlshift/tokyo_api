@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'vertebrae'
+require 'faraday/mashify'
 require 'tokyo_api/base'
 require 'tokyo_api/actionkit'
 require 'tokyo_api/campact'

@@ -57,21 +57,19 @@ module TokyoApi
     end
 
     def setup
-      connection.stack do |builder|
-        builder.use Faraday::Request::Multipart
-        builder.use Faraday::Request::UrlEncoded
+      connection.faraday_connection = Faraday.new(connection.configuration.faraday_options) do |f|
+        f.request :multipart
+        f.request :url_encoded
         if connection.configuration.authenticated?
-          builder.use Faraday::Request::BasicAuthentication, connection.configuration.username,
-                      connection.configuration.password
+          f.request :authorization, :basic, connection.configuration.username, connection.configuration.password
         end
 
-        builder.use Faraday::Response::Logger if ENV['DEBUG']
+        f.response :logger if ENV['DEBUG']
+        f.response :mashify
+        f.response :json
 
-        builder.use FaradayMiddleware::Mashify
-        builder.use FaradayMiddleware::ParseJson
-
-        builder.use Vertebrae::Response::RaiseError
-        builder.adapter connection.configuration.adapter
+        f.use Vertebrae::Response::RaiseError
+        f.adapter connection.configuration.adapter
       end
     end
   end
