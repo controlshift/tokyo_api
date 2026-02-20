@@ -14,8 +14,6 @@ Layout/SpaceInsideRangeLiteral:
   Enabled: true
 Lint:
   Enabled: true
-Lint/RaiseException:
-  Enabled: true
 Naming/AsciiIdentifiers:
   Enabled: true
 Naming/ClassAndModuleCamelCase:
